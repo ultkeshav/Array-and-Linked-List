@@ -1,34 +1,45 @@
+
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
-bool subarraySumExists(vector<int>& nums, int target) {
-    int start = 0, sum = 0;
-
-    for (int end = 0; end < nums.size(); end++) {
-        sum += nums[end];  // Expand window
-
-        // Shrink window if sum exceeds target
-        while (sum > target && start <= end) {
-            sum -= nums[start];
-            start++;
-        }
-
-        if (sum == target) return true;  // Found subarray
+bool SubArraywithGiveSum(int arr[], int n , int target){
+    
+    int currentSum = 0;
+    int left = 0;
+    
+    for(int right=0;right<n;right++){
+        
+        currentSum = currentSum + arr[right];
+    
+    while(currentSum>target && left<=right){
+        
+        currentSum = currentSum - arr[left];
+        left++;
     }
-
-    return false;  // No subarray found
+    
+    if(currentSum==target){
+        
+        return true;
+    }
+    
+    }
+    
+    return false;
 }
-
-int main() {
-    vector<int> nums = {1, 4, 20, 3, 10, 5};
+int main()
+{
+    int arr[] = {1, 4, 20, 3, 10, 5};
+    int n = sizeof(arr)/sizeof(arr[0]);
     int target = 33;
-
-    if (subarraySumExists(nums, target))
-        cout << "Subarray with sum " << target << " exists." << endl;
-    else
-        cout << "No subarray with sum " << target << " found." << endl;
+    
+    if (SubArraywithGiveSum(arr, n, target)) {
+        cout << "Subarray with the given sum exists!" << endl;
+    }
+    else {
+        cout << "Subarray with the given sum does not exist!" << endl;
+    }
+    
 
     return 0;
 }
