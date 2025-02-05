@@ -1,0 +1,30 @@
+lass Solution {
+  public:
+    int GetNth(Node *head, int index) {
+        
+        if(head==NULL){
+            
+            return -1;
+        }
+        
+        Node* current = head;
+        
+        int count = 1;
+            
+            while(current!=NULL){
+                
+                
+                if(count==index){
+                    
+                    return current->data;
+                }
+    
+                current = current->next;
+                count++;
+                
+            }
+            
+            return -1;
+        
+    }
+};
