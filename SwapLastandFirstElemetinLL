@@ -1,0 +1,22 @@
+class Solution {
+  public:
+    Node* moveToFront(Node* head) {
+        if (!head || !head->next) return head;  // Edge case: empty list or a single node
+
+        Node* prev = NULL;
+        Node* current = head;
+
+        // Traverse to the last node and the second-to-last node
+        while (current->next != NULL) {
+            prev = current;
+            current = current->next;
+        }
+
+        // Move the last node to the front
+        prev->next = NULL;       // Disconnect the last node from the list
+        current->next = head;    // Point the last node to the original head
+        head = current;          // Update the head to the last node
+
+        return head;             // Return the new head of the modified list
+    }
+};
