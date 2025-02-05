@@ -1,0 +1,40 @@
+
+class Solution {
+  public:
+    Node* reverse(Node* head, int k) {
+        if (!head || k <= 0) return head;
+
+        Node* prev = NULL;
+        Node* current = head;
+        Node* currentNext = NULL;
+        int count = 0;
+
+      
+        while (current!=NULL && count < k) {
+            
+            currentNext = current->next;
+            current->next = prev;
+            prev = current;
+            current = currentNext;
+            count++;
+        }
+
+        // Store the node from where the second part starts
+        Node* firstPartTail = head;
+        Node* secondPartHead = current;
+
+        // Reverse the remaining n-k nodes
+        Node* prev2 = NULL;
+        while (current) {
+            currentNext = current->next;
+            current->next = prev2;
+            prev2 = current;
+            current = currentNext;
+        }
+
+        // Connect the first reversed part with the second reversed part
+        firstPartTail->next = prev2;
+
+        return prev;
+    }
+};
